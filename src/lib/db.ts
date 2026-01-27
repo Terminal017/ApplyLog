@@ -11,7 +11,7 @@ interface ApplyLogDBSchema extends DBSchema {
     indexes: {
       'by-applyDate': string
       'by-companyLevel': string
-      'by-result': string | null
+      'by-result': string
     }
   }
 }

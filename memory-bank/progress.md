@@ -6,7 +6,7 @@
 
 ## 当前状态
 
-**当前阶段**：阶段二 - 类型定义与数据库层（已完成，等待测试）  
+**当前阶段**：阶段三 - 状态管理层（已完成，等待测试）  
 **开始时间**：2026 年 1 月 28 日
 
 ---
@@ -22,6 +22,9 @@
 | 二   | 2.1 定义 TypeScript 类型                  | ✅ 已完成 | 2026-01-28 | Application, CompanyLevel, ApplyChannel, ApplicationResult         |
 | 二   | 2.2 初始化 IndexedDB 数据库配置           | ✅ 已完成 | 2026-01-28 | ApplyLogDB, applications 对象仓库, 3 个索引                        |
 | 二   | 2.3 实现数据库 CRUD 操作函数              | ✅ 已完成 | 2026-01-28 | add, update, delete, get, getAll                                   |
+| 三   | 3.1 创建 Zustand Store 基础结构           | ✅ 已完成 | 2026-01-28 | applications, isLoading, error 状态                                |
+| 三   | 3.2 实现 Store 的数据操作方法             | ✅ 已完成 | 2026-01-28 | fetch, add, update, delete 方法                                    |
+| 三   | 3.3 添加筛选与排序状态                    | ✅ 已完成 | 2026-01-28 | filterByCompanyLevel, filterByInProgress, sortOrder                |
 
 ---
 
@@ -34,9 +37,9 @@
 - [x] 2.1 定义 TypeScript 类型
 - [x] 2.2 初始化 IndexedDB 数据库配置
 - [x] 2.3 实现数据库 CRUD 操作函数
-- [ ] 3.1 创建 Zustand Store 基础结构
-- [ ] 3.2 实现 Store 的数据操作方法
-- [ ] 3.3 添加筛选与排序状态
+- [x] 3.1 创建 Zustand Store 基础结构
+- [x] 3.2 实现 Store 的数据操作方法
+- [x] 3.3 添加筛选与排序状态
 - [ ] 4.1 配置 React Router
 - [ ] 5.1 创建 Navbar 导航栏组件
 - [ ] 5.2 创建 Modal 通用弹窗组件

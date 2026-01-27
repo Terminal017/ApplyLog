@@ -6,7 +6,7 @@
 
 ## 当前状态
 
-**当前阶段**：阶段一 - 项目初始化与基础配置（已完成，等待测试）  
+**当前阶段**：阶段二 - 类型定义与数据库层（已完成，等待测试）  
 **开始时间**：2026 年 1 月 28 日
 
 ---
@@ -19,6 +19,9 @@
 | 一   | 1.2 配置 Tailwind CSS                     | ✅ 已完成 | 2026-01-28 | 使用 Tailwind CSS v4 + @tailwindcss/postcss                        |
 | 一   | 1.3 安装项目所需依赖                      | ✅ 已完成 | 2026-01-28 | zustand, react-router-dom, date-fns, clsx, idb, uuid, lucide-react |
 | 一   | 1.4 创建项目目录结构                      | ✅ 已完成 | 2026-01-28 | components, pages, store, lib                                      |
+| 二   | 2.1 定义 TypeScript 类型                  | ✅ 已完成 | 2026-01-28 | Application, CompanyLevel, ApplyChannel, ApplicationResult         |
+| 二   | 2.2 初始化 IndexedDB 数据库配置           | ✅ 已完成 | 2026-01-28 | ApplyLogDB, applications 对象仓库, 3 个索引                        |
+| 二   | 2.3 实现数据库 CRUD 操作函数              | ✅ 已完成 | 2026-01-28 | add, update, delete, get, getAll                                   |
 
 ---
 
@@ -28,9 +31,9 @@
 - [x] 1.2 配置 Tailwind CSS
 - [x] 1.3 安装项目所需依赖
 - [x] 1.4 创建项目目录结构
-- [ ] 2.1 定义 TypeScript 类型
-- [ ] 2.2 初始化 IndexedDB 数据库配置
-- [ ] 2.3 实现数据库 CRUD 操作函数
+- [x] 2.1 定义 TypeScript 类型
+- [x] 2.2 初始化 IndexedDB 数据库配置
+- [x] 2.3 实现数据库 CRUD 操作函数
 - [ ] 3.1 创建 Zustand Store 基础结构
 - [ ] 3.2 实现 Store 的数据操作方法
 - [ ] 3.3 添加筛选与排序状态

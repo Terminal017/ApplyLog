@@ -6,7 +6,7 @@
 
 ## 当前状态
 
-**当前阶段**：阶段三 - 状态管理层（已完成，等待测试）  
+**当前阶段**：阶段四 - 路由配置（已完成，等待测试）  
 **开始时间**：2026 年 1 月 28 日
 
 ---
@@ -25,6 +25,7 @@
 | 三   | 3.1 创建 Zustand Store 基础结构           | ✅ 已完成 | 2026-01-28 | applications, isLoading, error 状态                                |
 | 三   | 3.2 实现 Store 的数据操作方法             | ✅ 已完成 | 2026-01-28 | fetch, add, update, delete 方法                                    |
 | 三   | 3.3 添加筛选与排序状态                    | ✅ 已完成 | 2026-01-28 | filterByCompanyLevel, filterByInProgress, sortOrder                |
+| 四   | 4.1 配置 React Router                     | ✅ 已完成 | 2026-01-28 | / → ApplicationsPage, /calendar → CalendarPage                     |
 
 ---
 
@@ -40,7 +41,7 @@
 - [x] 3.1 创建 Zustand Store 基础结构
 - [x] 3.2 实现 Store 的数据操作方法
 - [x] 3.3 添加筛选与排序状态
-- [ ] 4.1 配置 React Router
+- [x] 4.1 配置 React Router
 - [ ] 5.1 创建 Navbar 导航栏组件
 - [ ] 5.2 创建 Modal 通用弹窗组件
 - [ ] 5.3 创建 ConfirmDialog 确认对话框组件

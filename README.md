@@ -1,73 +1,71 @@
-# React + TypeScript + Vite
+# 应聘信息追踪系统 (ApplyLog)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+一个面向个人的应聘流程管理工具，用于集中记录、追踪和管理所有应聘投递信息。
 
-Currently, two official plugins are available:
+## ✨ 功能特性
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 📝 **投递记录管理**：支持新增、编辑、删除投递记录
+- 🔍 **筛选功能**：按公司级别筛选、筛选流程中的记录
+- 📊 **排序功能**：按投递日期升序/降序排列
+- 💾 **本地存储**：使用 IndexedDB 本地存储数据，无需后端服务
+- 📱 **响应式设计**：支持移动端和桌面端
 
-## React Compiler
+## 🛠️ 技术栈
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **前端框架**：React 19 + TypeScript
+- **构建工具**：Vite 7
+- **样式**：Tailwind CSS v4
+- **状态管理**：Zustand
+- **路由**：React Router v7
+- **数据库**：IndexedDB（使用 idb 库）
+- **图标**：Lucide React
 
-## Expanding the ESLint configuration
+## 🚀 快速开始
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 安装依赖
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 启动开发服务器
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run dev
 ```
+
+### 生产构建
+
+```bash
+npm run build
+```
+
+### 预览生产构建
+
+```bash
+npm run preview
+```
+
+## 📖 使用说明
+
+1. **新增投递**：点击右上角「新增投递」按钮
+2. **编辑投递**：单击卡片进入编辑模式
+3. **删除投递**：右键点击卡片选择删除
+4. **筛选记录**：使用筛选栏按公司级别或流程状态筛选
+5. **排序记录**：点击排序按钮切换升序/降序
+
+## 📁 项目结构
+
+```
+src/
+├── components/          # 可复用 UI 组件
+├── pages/               # 页面组件
+├── store/               # Zustand 状态管理
+├── lib/                 # 工具函数和配置
+├── App.tsx              # 根组件
+└── main.tsx             # 应用入口
+```
+
+## 📄 许可证
+
+MIT License

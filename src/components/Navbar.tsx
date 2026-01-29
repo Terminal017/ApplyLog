@@ -15,7 +15,7 @@ export default function Navbar({ onAddClick }: NavbarProps): ReactElement {
   return (
     <header className="bg-white shadow sticky top-0 z-50">
       <div className="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
-        <h1 className="text-xl font-semibold text-blue-600">实习投递追踪</h1>
+        <h1 className="text-xl font-semibold text-blue-600">应聘信息追踪</h1>
 
         <nav className="flex items-center space-x-6">
           <Link

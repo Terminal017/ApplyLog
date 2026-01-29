@@ -36,9 +36,8 @@ export default function ApplicationsPage({
         </div>
       ) : filteredApplications.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-12 text-center">
-          <div className="text-gray-400 text-6xl mb-4">📋</div>
-          <p className="text-gray-500 text-lg">暂无投递记录</p>
-          <p className="text-gray-400 text-sm mt-1">
+          <p className="text-gray-500 text-xl">暂无投递记录</p>
+          <p className="text-gray-400 mt-2">
             点击右上角「新增投递」按钮开始记录
           </p>
         </div>

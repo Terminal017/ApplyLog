@@ -1,8 +1,12 @@
 import { useState, useEffect, useCallback, type ReactElement } from 'react'
 import { Calendar } from 'lucide-react'
-import clsx from 'clsx'
 import type { Application } from '../lib/types'
-import { format } from 'date-fns'
+import {
+  cn,
+  formatShortDate,
+  getResultStatusColor,
+  getJobTypeColor,
+} from '../lib/utils'
 
 interface ApplicationCardProps {
   application: Application
@@ -23,34 +27,6 @@ export default function ApplicationCard({
   const [contextMenu, setContextMenu] = useState<ContextMenuPosition | null>(
     null,
   )
-
-  // 获取结果显示样式
-  const getResultStyle = (result: Application['result']) => {
-    if (result === '流程中') {
-      return 'bg-sky-400 text-white'
-    }
-    if (result === '待投递') {
-      return 'bg-gray-400 text-white'
-    }
-    if (result === 'offer') {
-      return 'bg-green-500 text-white'
-    }
-    return 'bg-red-500 text-white'
-  }
-
-  // 获取结果显示文本
-  const getResultText = (result: Application['result']) => {
-    return result
-  }
-
-  // 格式化日期为 x月x日
-  const formatDate = (dateStr: string) => {
-    try {
-      return format(new Date(dateStr), 'M月d日')
-    } catch {
-      return dateStr
-    }
-  }
 
   // 处理右键菜单
   const handleContextMenu = (e: React.MouseEvent) => {
@@ -136,18 +112,23 @@ export default function ApplicationCard({
 
           {/* 结果标签 */}
           <span
-            className={clsx(
+            className={cn(
               'px-3 py-1 text-sm font-medium rounded-lg shrink-0',
-              getResultStyle(application.result),
+              getResultStatusColor(application.result),
             )}
           >
-            {getResultText(application.result)}
+            {application.result}
           </span>
         </div>
 
         {/* 第二行：岗位类型 + 城市·投递渠道 */}
         <div className="flex items-center gap-2 pb-3 mb-3 border-b border-gray-100">
-          <span className="px-2 py-0.5 text-xs text-orange-600 bg-orange-50 rounded">
+          <span
+            className={cn(
+              'px-2 py-0.5 text-xs rounded',
+              getJobTypeColor(application.jobType || '日常实习'),
+            )}
+          >
             {application.jobType || '日常实习'}
           </span>
           <span className="px-2 py-0.5 text-xs text-gray-500 bg-gray-100 rounded">
@@ -166,12 +147,12 @@ export default function ApplicationCard({
         </div>
 
         {/* 最后一行：投递时间 + 分类 */}
-        <div className="flex items-center justify-between text-sm text-gray-400 pt-2 border-t border-gray-50">
-          <div className="flex items-center gap-1">
+        <div className="flex items-center justify-between text-sm pt-2 border-t border-gray-50">
+          <div className="flex items-center gap-1 text-gray-700">
             <Calendar size={14} />
-            <span>投递时间：{formatDate(application.applyDate)}</span>
+            <span>投递时间：{formatShortDate(application.applyDate)}</span>
           </div>
-          <span>{application.companyLevel}</span>
+          <span className="text-gray-700">{application.companyLevel}</span>
         </div>
       </div>
 

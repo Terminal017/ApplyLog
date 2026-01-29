@@ -217,6 +217,35 @@ App.tsx
   - 排序方向切换按钮（升序/降序）
   - 直接连接 Zustand Store 状态
 
+### ApplicationForm (src/components/ApplicationForm.tsx)
+
+- **功能**：投递记录新增/编辑表单
+- **Props**：
+  - `initialData?: Application` - 编辑模式时传入已有数据
+  - `onSubmit: (data: ApplicationInput) => void` - 提交回调
+  - `onCancel: () => void` - 取消回调
+- **特性**：
+  - 包含所有字段输入控件（公司名称、岗位名称、城市、公司级别、投递渠道、投递链接、投递时间、当前流程、投递结果、信息记录、备注）
+  - 必填字段验证（公司名称、岗位名称、城市、投递时间）
+  - 新增模式：按钮显示"添加"
+  - 编辑模式：自动填充已有数据，按钮显示"保存修改"
+
+### ApplicationCard (src/components/ApplicationCard.tsx)
+
+- **功能**：投递记录卡片展示组件
+- **Props**：
+  - `application: Application` - 投递记录数据
+  - `onEdit: (application: Application) => void` - 编辑回调
+  - `onDelete: (id: string) => void` - 删除回调
+- **特性**：
+  - 展示所有字段信息
+  - 公司名称可点击跳转到投递链接（新标签页）
+  - 结果状态颜色标签（offer 绿色、挂 红色、流程中 蓝色）
+  - 可折叠详情区域（信息记录、备注）
+  - 单击卡片触发编辑
+  - 右键菜单支持删除操作
+  - 点击其他区域或 ESC 关闭右键菜单
+
 ---
 
 ## 七、状态管理设计

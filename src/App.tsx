@@ -121,7 +121,7 @@ function App(): ReactElement {
   return (
     <BrowserRouter>
       <div className="min-h-screen bg-gray-100">
-        <Navbar onAddClick={handleAddClick} />
+        <Navbar />
 
         <main className="max-w-5xl mx-auto p-6">
           <Routes>
@@ -129,6 +129,7 @@ function App(): ReactElement {
               path="/"
               element={
                 <ApplicationsPage
+                  onAdd={handleAddClick}
                   onEdit={handleEditClick}
                   onDelete={handleDeleteClick}
                 />

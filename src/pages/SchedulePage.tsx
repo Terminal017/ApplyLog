@@ -152,7 +152,7 @@ export default function SchedulePage(): ReactElement {
           </table>
 
           {/* 分页 */}
-          <div className="flex items-center justify-between px-4 py-3 border-t border-gray-200">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 px-4 py-3 border-t border-gray-200">
             <div className="text-sm text-gray-500">
               共 {stats.total} 个日程，{stats.completed} 个已完成
             </div>

@@ -180,7 +180,7 @@ export default function ScheduleRow({
           >
             <div
               className={cn(
-                'w-5 h-5 rounded border-2 flex items-center justify-center cursor-pointer transition-colors',
+                'w-5.5 h-5.5 rounded border-2 flex items-center justify-center cursor-pointer transition-colors',
                 schedule.completed
                   ? 'bg-blue-600 border-blue-600'
                   : 'border-gray-300 hover:border-blue-400',

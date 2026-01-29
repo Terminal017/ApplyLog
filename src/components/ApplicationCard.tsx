@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, type ReactElement } from 'react'
-import { ExternalLink, ChevronDown, ChevronUp } from 'lucide-react'
+import { Calendar } from 'lucide-react'
 import clsx from 'clsx'
 import type { Application } from '../lib/types'
 import { format } from 'date-fns'
@@ -20,34 +20,33 @@ export default function ApplicationCard({
   onEdit,
   onDelete,
 }: ApplicationCardProps): ReactElement {
-  const [isExpanded, setIsExpanded] = useState(false)
   const [contextMenu, setContextMenu] = useState<ContextMenuPosition | null>(
     null,
   )
 
   // 获取结果显示样式
   const getResultStyle = (result: Application['result']) => {
-    if (result === null) {
-      return 'bg-blue-100 text-blue-700'
+    if (result === '流程中') {
+      return 'bg-sky-400 text-white'
+    }
+    if (result === '待投递') {
+      return 'bg-gray-400 text-white'
     }
     if (result === 'offer') {
-      return 'bg-green-100 text-green-700'
+      return 'bg-green-500 text-white'
     }
-    return 'bg-red-100 text-red-700'
+    return 'bg-red-500 text-white'
   }
 
   // 获取结果显示文本
   const getResultText = (result: Application['result']) => {
-    if (result === null) {
-      return '流程中'
-    }
     return result
   }
 
-  // 格式化日期
+  // 格式化日期为 x月x日
   const formatDate = (dateStr: string) => {
     try {
-      return format(new Date(dateStr), 'yyyy-MM-dd')
+      return format(new Date(dateStr), 'M月d日')
     } catch {
       return dateStr
     }
@@ -82,10 +81,6 @@ export default function ApplicationCard({
     if ((e.target as HTMLElement).closest('a')) {
       return
     }
-    // 如果点击的是展开按钮，不触发编辑
-    if ((e.target as HTMLElement).closest('[data-expand-btn]')) {
-      return
-    }
     onEdit(application)
   }
 
@@ -110,40 +105,39 @@ export default function ApplicationCard({
   return (
     <>
       <div
-        className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 cursor-pointer hover:shadow-md transition-shadow"
+        className="bg-white rounded-xl shadow-sm border border-gray-100 p-5 cursor-pointer hover:shadow-md transition-shadow"
         onClick={handleCardClick}
         onContextMenu={handleContextMenu}
       >
-        {/* 头部：公司名称 + 结果标签 */}
-        <div className="flex items-start justify-between mb-2">
-          <div className="flex-1 min-w-0">
-            {/* 公司名称 - 可点击跳转 */}
+        {/* 第一行：公司名称 + 岗位名称 + 结果标签 */}
+        <div className="flex items-center justify-between mb-1">
+          <div className="flex items-center gap-2 min-w-0 flex-1">
+            {/* 公司名称 - 蓝色，可点击跳转 */}
             {application.applyLink ? (
               <a
                 href={application.applyLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-lg font-semibold text-blue-600 hover:text-blue-800 hover:underline inline-flex items-center gap-1"
+                className="text-lg font-bold text-blue-600 hover:text-blue-800 truncate"
                 onClick={(e) => e.stopPropagation()}
               >
                 {application.companyName}
-                <ExternalLink size={14} />
               </a>
             ) : (
-              <h3 className="text-lg font-semibold text-gray-900">
+              <span className="text-lg font-bold text-blue-600 truncate">
                 {application.companyName}
-              </h3>
+              </span>
             )}
             {/* 岗位名称 */}
-            <p className="text-sm text-gray-600 mt-0.5">
+            <span className="text-sm text-gray-500 truncate">
               {application.jobName}
-            </p>
+            </span>
           </div>
 
           {/* 结果标签 */}
           <span
             className={clsx(
-              'px-2 py-1 text-xs font-medium rounded-full',
+              'px-3 py-1 text-sm font-medium rounded-lg shrink-0',
               getResultStyle(application.result),
             )}
           >
@@ -151,73 +145,34 @@ export default function ApplicationCard({
           </span>
         </div>
 
-        {/* 信息行 */}
-        <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm text-gray-500 mb-2">
-          <span>{application.city}</span>
-          <span>{application.companyLevel}</span>
-          <span>{application.applyChannel}</span>
-        </div>
-
-        {/* 投递时间和当前流程 */}
-        <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm mb-2">
-          <span className="text-gray-500">
-            投递时间：{formatDate(application.applyDate)}
+        {/* 第二行：岗位类型 + 城市·投递渠道 */}
+        <div className="flex items-center gap-2 pb-3 mb-3 border-b border-gray-100">
+          <span className="px-2 py-0.5 text-xs text-orange-600 bg-orange-50 rounded">
+            {application.jobType || '日常实习'}
           </span>
-          <span className="text-gray-700">
-            当前流程：
-            <span className="font-medium">{application.processStatus}</span>
+          <span className="px-2 py-0.5 text-xs text-gray-500 bg-gray-100 rounded">
+            {application.city} · {application.applyChannel}投递
           </span>
         </div>
 
-        {/* 展开/折叠按钮 */}
-        {(application.record || application.remark) && (
-          <button
-            data-expand-btn
-            onClick={(e) => {
-              e.stopPropagation()
-              setIsExpanded(!isExpanded)
-            }}
-            className="flex items-center gap-1 text-sm text-gray-500 hover:text-gray-700 mt-2"
-          >
-            {isExpanded ? (
-              <>
-                <ChevronUp size={16} />
-                收起详情
-              </>
-            ) : (
-              <>
-                <ChevronDown size={16} />
-                展开详情
-              </>
-            )}
-          </button>
-        )}
+        {/* 第三行：当前进度 */}
+        <div className="text-sm text-gray-900 font-medium mb-1 text-left">
+          当前进度：{application.processStatus}
+        </div>
 
-        {/* 折叠内容：信息记录和备注 */}
-        {isExpanded && (
-          <div className="mt-3 pt-3 border-t border-gray-100 space-y-2">
-            {application.record && (
-              <div>
-                <span className="text-sm font-medium text-gray-700">
-                  信息记录：
-                </span>
-                <p className="text-sm text-gray-600 whitespace-pre-wrap">
-                  {application.record}
-                </p>
-              </div>
-            )}
-            {application.remark && (
-              <div>
-                <span className="text-sm font-medium text-gray-700">
-                  备注：
-                </span>
-                <p className="text-sm text-gray-600 whitespace-pre-wrap">
-                  {application.remark}
-                </p>
-              </div>
-            )}
+        {/* 第四行：记录 */}
+        <div className="text-sm text-gray-500 mb-3 text-left">
+          记录：{application.record || '无'}
+        </div>
+
+        {/* 最后一行：投递时间 + 分类 */}
+        <div className="flex items-center justify-between text-sm text-gray-400 pt-2 border-t border-gray-50">
+          <div className="flex items-center gap-1">
+            <Calendar size={14} />
+            <span>投递时间：{formatDate(application.applyDate)}</span>
           </div>
-        )}
+          <span>{application.companyLevel}</span>
+        </div>
       </div>
 
       {/* 右键菜单 */}

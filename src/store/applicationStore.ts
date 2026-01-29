@@ -148,9 +148,9 @@ export const useApplicationStore = create<ApplicationState>((set, get) => ({
       )
     }
 
-    // 筛选流程中的投递（result === null）
+    // 筛选流程中的投递（result === '流程中'）
     if (filterByInProgress) {
-      filtered = filtered.filter((app) => app.result === null)
+      filtered = filtered.filter((app) => app.result === '流程中')
     }
 
     // 按投递时间排序

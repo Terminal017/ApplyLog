@@ -1,5 +1,5 @@
 import './App.css'
-import { useState, type ReactElement } from 'react'
+import { useState, useCallback, type ReactElement } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import ApplicationsPage from './pages/ApplicationsPage'
 import CalendarPage from './pages/CalendarPage'
@@ -7,12 +7,37 @@ import Navbar from './components/Navbar'
 import Modal from './components/Modal'
 import ConfirmDialog from './components/ConfirmDialog'
 import ApplicationForm from './components/ApplicationForm'
+import Toast, { type ToastType } from './components/Toast'
 import { useApplicationStore } from './store/applicationStore'
 import type { Application, ApplicationInput } from './lib/types'
+
+interface ToastState {
+  isVisible: boolean
+  message: string
+  type: ToastType
+}
 
 function App(): ReactElement {
   const { addApplication, updateApplication, deleteApplication } =
     useApplicationStore()
+
+  // Toast 通知状态
+  const [toast, setToast] = useState<ToastState>({
+    isVisible: false,
+    message: '',
+    type: 'success',
+  })
+
+  const showToast = useCallback(
+    (message: string, type: ToastType = 'success') => {
+      setToast({ isVisible: true, message, type })
+    },
+    [],
+  )
+
+  const hideToast = useCallback(() => {
+    setToast((prev) => ({ ...prev, isVisible: false }))
+  }, [])
 
   // 新增弹窗状态
   const [isAddModalOpen, setIsAddModalOpen] = useState(false)
@@ -36,8 +61,13 @@ function App(): ReactElement {
   }
 
   const handleAddSubmit = async (data: ApplicationInput) => {
-    await addApplication(data)
+    const result = await addApplication(data)
     setIsAddModalOpen(false)
+    if (result) {
+      showToast('投递记录添加成功')
+    } else {
+      showToast('添加失败，请重试', 'error')
+    }
   }
 
   // 编辑投递
@@ -53,9 +83,14 @@ function App(): ReactElement {
 
   const handleEditSubmit = async (data: ApplicationInput) => {
     if (editingApplication) {
-      await updateApplication(editingApplication.id, data)
+      const result = await updateApplication(editingApplication.id, data)
       setIsEditModalOpen(false)
       setEditingApplication(null)
+      if (result) {
+        showToast('投递记录更新成功')
+      } else {
+        showToast('更新失败，请重试', 'error')
+      }
     }
   }
 
@@ -67,9 +102,14 @@ function App(): ReactElement {
 
   const handleConfirmDelete = async () => {
     if (deletingId) {
-      await deleteApplication(deletingId)
+      const success = await deleteApplication(deletingId)
       setIsDeleteDialogOpen(false)
       setDeletingId(null)
+      if (success) {
+        showToast('投递记录已删除')
+      } else {
+        showToast('删除失败，请重试', 'error')
+      }
     }
   }
 
@@ -83,7 +123,7 @@ function App(): ReactElement {
       <div className="min-h-screen bg-gray-100">
         <Navbar onAddClick={handleAddClick} />
 
-        <main className="max-w-4xl mx-auto p-4">
+        <main className="max-w-5xl mx-auto p-6">
           <Routes>
             <Route
               path="/"
@@ -132,6 +172,14 @@ function App(): ReactElement {
           onCancel={handleCancelDelete}
           title="确认删除"
           message="确定要删除这条投递记录吗？此操作不可撤销。"
+        />
+
+        {/* Toast 通知 */}
+        <Toast
+          isVisible={toast.isVisible}
+          message={toast.message}
+          type={toast.type}
+          onClose={hideToast}
         />
       </div>
     </BrowserRouter>

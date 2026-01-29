@@ -62,7 +62,8 @@ src/
 │   ├── ConfirmDialog.tsx    # 确认对话框
 │   ├── FilterBar.tsx        # 筛选栏
 │   ├── ApplicationCard.tsx  # 投递记录卡片
-│   └── ApplicationForm.tsx  # 新增/编辑表单
+│   ├── ApplicationForm.tsx  # 新增/编辑表单
+│   └── Toast.tsx            # 操作反馈通知
 │
 ├── pages/              # 页面组件
 │   ├── ApplicationsPage.tsx  # 投递记录表页面
@@ -74,7 +75,8 @@ src/
 ├── lib/                # 工具函数和配置
 │   ├── db.ts               # IndexedDB 数据库操作
 │   ├── types.ts            # TypeScript 类型定义
-│   └── utils.ts            # 通用工具函数
+│   ├── dateUtils.ts        # 日期工具函数
+│   └── styleUtils.ts       # 样式工具函数
 │
 ├── App.tsx             # 根组件（路由配置）
 ├── main.tsx            # 应用入口
@@ -129,6 +131,7 @@ interface Application {
   id: string
   companyName: string
   jobName: string
+  jobType: JobType
   city: string
   companyLevel: CompanyLevel
   applyChannel: ApplyChannel
@@ -137,7 +140,6 @@ interface Application {
   processStatus: string
   record: string
   result: ApplicationResult
-  remark: string
   createdAt: string
   updatedAt: string
 }
@@ -146,16 +148,29 @@ interface Application {
 type CompanyLevel = '大厂' | '中厂' | '小厂' | '国企' | '外企'
 
 // 投递渠道
-type ApplyChannel = '官网' | '内推' | '邮箱' | '其他'
+type ApplyChannel = '官网' | 'Boss直聘' | '牛客' | '实习僧' | '内推' | '其他'
+
+// 岗位类型
+type JobType = '日常实习' | '暑期实习' | '校招'
 
 // 投递结果
 type ApplicationResult =
+  | '待投递'
+  | '流程中'
   | 'offer'
-  | '一面挂'
-  | '二面挂'
-  | '三面挂'
-  | 'hr挂'
-  | null
+  | '简历挂'
+  | '笔试挂'
+  | '面试挂'
+
+// 当前进度
+type ApplicationStatus =
+  | '简历初筛'
+  | '笔试'
+  | '一面'
+  | '二面'
+  | '三面'
+  | 'HR面'
+  | '录用'
 ```
 
 ---
@@ -245,7 +260,7 @@ App.tsx
   - `onSubmit: (data: ApplicationInput) => void` - 提交回调
   - `onCancel: () => void` - 取消回调
 - **特性**：
-  - 包含所有字段输入控件（公司名称、岗位名称、城市、公司级别、投递渠道、投递链接、投递时间、当前流程、投递结果、信息记录、备注）
+  - 包含所有字段输入控件（公司名称、岗位名称、岗位类型、城市、公司级别、投递渠道、投递链接、投递时间、当前进度、投递结果、面试记录）
   - 必填字段验证（公司名称、岗位名称、城市、投递时间）
   - 新增模式：按钮显示"添加"
   - 编辑模式：自动填充已有数据，按钮显示"保存修改"
@@ -258,17 +273,61 @@ App.tsx
   - `onEdit: (application: Application) => void` - 编辑回调
   - `onDelete: (id: string) => void` - 删除回调
 - **特性**：
-  - 展示所有字段信息
-  - 公司名称可点击跳转到投递链接（新标签页）
-  - 结果状态颜色标签（offer 绿色、挂 红色、流程中 蓝色）
-  - 可折叠详情区域（信息记录、备注）
+  - 两列网格布局展示（lg 屏幕）
+  - 第一行：公司名称（蓝色）+ 岗位名称 + 投递结果标签（右上角）
+  - 第二行：岗位类型标签 + 分隔线 + 城市 + 投递渠道
+  - 详情区域：当前进度、面试记录
+  - 底部：投递时间（左侧）+ 公司级别标签（右侧）
+  - 结果状态颜色标签（offer 绿色、挂 红色、流程中 天蓝色、待投递 灰色）
   - 单击卡片触发编辑
   - 右键菜单支持删除操作
-  - 点击其他区域或 ESC 关闭右键菜单
+
+### Toast (src/components/Toast.tsx)
+
+- **功能**：操作反馈通知组件
+- **Props**：
+  - `message: string` - 提示消息
+  - `type: 'success' | 'error'` - 通知类型
+  - `isVisible: boolean` - 控制显示/隐藏
+  - `onClose: () => void` - 关闭回调
+  - `duration?: number` - 自动关闭时间（默认 3000ms）
+- **特性**：
+  - 使用 React Portal 渲染到 body
+  - 固定在顶部中间显示
+  - 自动消失（可配置时间）
+  - 成功绿色、错误红色样式
+  - 支持手动关闭
 
 ---
 
-## 七、状态管理设计
+## 七、工具函数
+
+### dateUtils.ts（日期工具函数）
+
+| 函数名            | 说明                                     | 返回值    |
+| ----------------- | ---------------------------------------- | --------- |
+| `formatDate`      | 格式化日期为 YYYY-MM-DD                  | `string`  |
+| `formatDateCN`    | 格式化日期为中文格式 YYYY 年 MM 月 DD 日 | `string`  |
+| `getRelativeTime` | 获取相对时间描述（今天、昨天、X 天前）   | `string`  |
+| `getDaysDiff`     | 计算两个日期之间的天数差                 | `number`  |
+| `isToday`         | 判断日期是否是今天                       | `boolean` |
+| `getTodayString`  | 获取今天的日期字符串                     | `string`  |
+
+### styleUtils.ts（样式工具函数）
+
+| 函数名                 | 说明                       | 返回值                   |
+| ---------------------- | -------------------------- | ------------------------ |
+| `getResultStyles`      | 获取投递结果对应的样式     | `{ bgColor, textColor }` |
+| `getStatusStyles`      | 获取投递状态对应的样式     | `{ bgColor, textColor }` |
+| `getJobTypeStyles`     | 获取岗位类型对应的样式     | `{ bgColor, textColor }` |
+| `cn`                   | 合并多个类名               | `string`                 |
+| `getResultBadgeClass`  | 生成投递结果徽章的完整类名 | `string`                 |
+| `getStatusBadgeClass`  | 生成投递状态徽章的完整类名 | `string`                 |
+| `getJobTypeBadgeClass` | 生成岗位类型徽章的完整类名 | `string`                 |
+
+---
+
+## 八、状态管理设计
 
 ### applicationStore 状态
 
@@ -300,6 +359,6 @@ interface ApplicationState {
 
 ---
 
-## 八、开发进度
+## 九、开发进度
 
 此部分内容详见 `progress.md`。

@@ -30,7 +30,8 @@ export default function ApplicationsPage({
 
       {/* 投递记录列表 */}
       {isLoading ? (
-        <div className="flex items-center justify-center py-12">
+        <div className="flex flex-col items-center justify-center py-12">
+          <div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mb-4" />
           <div className="text-gray-500">加载中...</div>
         </div>
       ) : filteredApplications.length === 0 ? (
@@ -42,7 +43,7 @@ export default function ApplicationsPage({
           </p>
         </div>
       ) : (
-        <div className="space-y-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-5xl mx-auto">
           {filteredApplications.map((application) => (
             <ApplicationCard
               key={application.id}

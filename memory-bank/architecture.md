@@ -91,13 +91,33 @@ src/
 
 ### 示例：新增投递记录
 
-1. 用户点击 Navbar 的「新增」按钮
-2. 打开 Modal，显示 ApplicationForm
+1. 用户点击 Navbar 的「新增投递」按钮
+2. App.tsx 打开 Modal，显示 ApplicationForm（新增模式）
 3. 用户填写表单并提交
 4. 调用 `applicationStore.addApplication(data)`
 5. Store 内部调用 `db.addApplication(data)` 写入 IndexedDB
 6. 成功后更新 Store 中的 `applications` 数组
 7. ApplicationsPage 自动重新渲染，显示新记录
+
+### 示例：编辑投递记录
+
+1. 用户单击 ApplicationCard 卡片
+2. App.tsx 打开 Modal，显示 ApplicationForm（编辑模式，传入 initialData）
+3. 用户修改表单并提交
+4. 调用 `applicationStore.updateApplication(id, data)`
+5. Store 内部调用 `db.updateApplication(id, data)` 更新 IndexedDB
+6. 成功后更新 Store 中的 `applications` 数组
+7. ApplicationsPage 自动重新渲染，显示更新后的记录
+
+### 示例：删除投递记录
+
+1. 用户右键点击 ApplicationCard 卡片，选择「删除」
+2. App.tsx 打开 ConfirmDialog 确认对话框
+3. 用户点击「确认删除」
+4. 调用 `applicationStore.deleteApplication(id)`
+5. Store 内部调用 `db.deleteApplication(id)` 从 IndexedDB 删除
+6. 成功后更新 Store 中的 `applications` 数组
+7. ApplicationsPage 自动重新渲染，移除该记录
 
 ---
 

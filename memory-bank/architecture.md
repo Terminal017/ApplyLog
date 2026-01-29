@@ -35,6 +35,12 @@
 │  │  - isLoading: boolean                                   ││
 │  │  - filterByCompanyLevel / filterByInProgress / sortOrder││
 │  │  - fetchApplications / addApplication / updateApplication││
+│  ├─────────────────────────────────────────────────────────┤│
+│  │  scheduleStore                                          ││
+│  │  - schedules: Schedule[]                                ││
+│  │  - showOnlyIncomplete / sortOrder / currentPage         ││
+│  │  - fetchSchedules / addSchedule / toggleComplete        ││
+│  │  - getFilteredAndSortedSchedules / getPaginatedSchedules││
 │  └─────────────────────────────────────────────────────────┘│
 └─────────────────────────────────────────────────────────────┘
                               │
@@ -73,7 +79,8 @@ src/
 │   └── CalendarPage.tsx      # 日程表页面（预留）
 │
 ├── store/              # Zustand 状态管理
-│   └── applicationStore.ts   # 投递记录状态
+│   ├── applicationStore.ts   # 投递记录状态
+│   └── scheduleStore.ts      # 日程状态
 │
 ├── lib/                # 工具函数和配置
 │   ├── db.ts               # IndexedDB 数据库操作

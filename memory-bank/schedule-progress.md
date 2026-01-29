@@ -2,7 +2,7 @@
 
 # 日程表页面开发进度
 
-## 当前状态：阶段一已完成，等待测试
+## 当前状态：阶段二已完成，等待测试
 
 ---
 
@@ -14,11 +14,11 @@
 - [x] 定义 Schedule 类型（types.ts）
 - [x] 实现日程 CRUD 操作（db.ts）
 
-### 阶段二：状态管理
+### 阶段二：状态管理 ✅
 
-- [ ] 创建 scheduleStore.ts
-- [ ] 实现日程列表状态管理
-- [ ] 实现筛选和排序逻辑
+- [x] 创建 scheduleStore.ts
+- [x] 实现日程列表状态管理
+- [x] 实现筛选和排序逻辑
 
 ### 阶段三：UI 组件
 
@@ -54,3 +54,13 @@
 - 扩展 `db.ts`，将数据库版本升级至 v2，添加 `schedules` 对象仓库
 - 实现日程 CRUD 操作：`addSchedule`、`updateSchedule`、`deleteSchedule`、`getSchedule`、`getAllSchedules`
 - 添加索引：`by-date`（按日期）、`by-completed`（按完成状态）
+
+### 2024 年 1 月 29 日 - 阶段二完成
+
+- 创建 `scheduleStore.ts`，使用 Zustand 进行状态管理
+- 实现日程列表状态管理：`fetchSchedules`、`addSchedule`、`updateSchedule`、`deleteSchedule`、`toggleComplete`
+- 实现筛选逻辑：`showOnlyIncomplete`（仅显示未完成）
+- 实现排序逻辑：按日期时间排序，未完成日程在前，已完成日程在后
+- 实现分页功能：`currentPage`、`pageSize`、`getPaginatedSchedules`、`getTotalPages`
+- 添加工具函数：`isToday`、`isTomorrow`（用于日期高亮判断）
+- 添加统计功能：`getStats`（返回总数和已完成数）

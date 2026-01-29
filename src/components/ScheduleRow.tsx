@@ -120,24 +120,24 @@ export default function ScheduleRow({
         onContextMenu={handleContextMenu}
       >
         {/* 日期列 */}
-        <td className="py-4 px-4">
+        <td className="py-4 px-3 w-54">
           <div className="flex flex-col">
             <span
               className={cn(
-                'font-medium',
+                'font-medium text-sm',
                 schedule.completed && 'line-through text-gray-400',
               )}
             >
               {formatDate(schedule.date)}
             </span>
-            <span className="text-sm text-gray-500">
+            <span className="text-xs text-gray-500">
               {getWeekDay(schedule.date)}
             </span>
           </div>
         </td>
 
         {/* 时间列 */}
-        <td className="py-4 px-4">
+        <td className="py-4 px-3 w-48">
           <span
             className={cn(
               'text-blue-600 font-medium',
@@ -173,7 +173,7 @@ export default function ScheduleRow({
         </td>
 
         {/* 状态列 */}
-        <td className="py-4 px-4">
+        <td className="py-4 px-3 w-16">
           <div
             className="checkbox-area flex justify-center"
             onClick={handleCheckboxClick}

@@ -121,19 +121,19 @@ export default function SchedulePage(): ReactElement {
         </div>
       ) : (
         <div className="bg-white rounded-lg shadow overflow-hidden">
-          <table className="w-full">
+          <table className="w-full table-fixed">
             <thead className="bg-gray-50 border-b border-gray-200">
               <tr>
-                <th className="py-3 px-4 text-left text-sm font-medium text-gray-600">
+                <th className="py-3 px-4 text-left text-sm font-medium text-gray-600 w-54">
                   日期
                 </th>
-                <th className="py-3 px-4 text-left text-sm font-medium text-gray-600">
+                <th className="py-3 px-4 text-left text-sm font-medium text-gray-600 w-48">
                   时间
                 </th>
                 <th className="py-3 px-4 text-left text-sm font-medium text-gray-600">
                   日程内容
                 </th>
-                <th className="py-3 px-4 text-center text-sm font-medium text-gray-600">
+                <th className="py-3 px-4 text-center text-sm font-medium text-gray-600 w-16">
                   状态
                 </th>
               </tr>

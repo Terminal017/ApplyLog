@@ -2,7 +2,7 @@
 
 # 日程表页面开发进度
 
-## 当前状态：阶段二已完成，等待测试
+## 当前状态：阶段三已完成，等待测试
 
 ---
 
@@ -20,12 +20,12 @@
 - [x] 实现日程列表状态管理
 - [x] 实现筛选和排序逻辑
 
-### 阶段三：UI 组件
+### 阶段三：UI 组件 ✅
 
-- [ ] 创建 ScheduleFilterBar 组件（筛选栏）
-- [ ] 创建 ScheduleRow 组件（日程行）
-- [ ] 创建 ScheduleForm 组件（新增/编辑表单）
-- [ ] 创建 SchedulePage 页面
+- [x] 创建 ScheduleFilterBar 组件（筛选栏）
+- [x] 创建 ScheduleRow 组件（日程行）
+- [x] 创建 ScheduleForm 组件（新增/编辑表单）
+- [x] 创建 SchedulePage 页面
 
 ### 阶段四：功能实现
 
@@ -64,3 +64,11 @@
 - 实现分页功能：`currentPage`、`pageSize`、`getPaginatedSchedules`、`getTotalPages`
 - 添加工具函数：`isToday`、`isTomorrow`（用于日期高亮判断）
 - 添加统计功能：`getStats`（返回总数和已完成数）
+
+### 2024 年 1 月 29 日 - 阶段三完成
+
+- 创建 `ScheduleFilterBar.tsx`：筛选栏组件，包含按时间排序、仅显示未完成、新增日程按钮
+- 创建 `ScheduleRow.tsx`：日程行组件，支持日期高亮（当天橙色、明天蓝色）、完成状态切换、右键删除
+- 创建 `ScheduleForm.tsx`：新增/编辑表单组件，包含日期、时间、标题、描述字段
+- 创建 `SchedulePage.tsx`：日程表页面，整合所有组件，包含表格布局、分页、弹窗
+- 更新 `App.tsx` 路由，将 `/calendar` 路径指向 SchedulePage

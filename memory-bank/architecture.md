@@ -69,14 +69,17 @@ src/
 │   ├── Navbar.tsx           # 导航栏
 │   ├── Modal.tsx            # 通用弹窗
 │   ├── ConfirmDialog.tsx    # 确认对话框
-│   ├── FilterBar.tsx        # 筛选栏
+│   ├── FilterBar.tsx        # 投递记录筛选栏
 │   ├── ApplicationCard.tsx  # 投递记录卡片
-│   ├── ApplicationForm.tsx  # 新增/编辑表单
-│   └── Toast.tsx            # 操作反馈通知
+│   ├── ApplicationForm.tsx  # 投递记录表单
+│   ├── Toast.tsx            # 操作反馈通知
+│   ├── ScheduleFilterBar.tsx # 日程筛选栏
+│   ├── ScheduleRow.tsx      # 日程行组件
+│   └── ScheduleForm.tsx     # 日程表单
 │
 ├── pages/              # 页面组件
 │   ├── ApplicationsPage.tsx  # 投递记录表页面
-│   └── CalendarPage.tsx      # 日程表页面（预留）
+│   └── SchedulePage.tsx      # 日程表页面
 │
 ├── store/              # Zustand 状态管理
 │   ├── applicationStore.ts   # 投递记录状态
@@ -85,8 +88,7 @@ src/
 ├── lib/                # 工具函数和配置
 │   ├── db.ts               # IndexedDB 数据库操作
 │   ├── types.ts            # TypeScript 类型定义
-│   ├── dateUtils.ts        # 日期工具函数
-│   └── styleUtils.ts       # 样式工具函数
+│   └── utils.ts            # 工具函数（日期、样式等）
 │
 ├── App.tsx             # 根组件（路由配置）
 ├── main.tsx            # 应用入口

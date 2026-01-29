@@ -2,7 +2,7 @@ import './App.css'
 import { useState, useCallback, type ReactElement } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import ApplicationsPage from './pages/ApplicationsPage'
-import CalendarPage from './pages/CalendarPage'
+import SchedulePage from './pages/SchedulePage'
 import Navbar from './components/Navbar'
 import Modal from './components/Modal'
 import ConfirmDialog from './components/ConfirmDialog'
@@ -134,7 +134,7 @@ function App(): ReactElement {
                 />
               }
             />
-            <Route path="/calendar" element={<CalendarPage />} />
+            <Route path="/calendar" element={<SchedulePage />} />
           </Routes>
         </main>
 

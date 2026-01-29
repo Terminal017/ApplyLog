@@ -168,6 +168,57 @@ App.tsx
 
 ---
 
+## 六-A、已实现组件说明
+
+### Navbar (src/components/Navbar.tsx)
+
+- **功能**：顶部导航栏
+- **Props**：`onAddClick: () => void` - 新增按钮点击回调
+- **特性**：
+  - 应用标题"实习投递追踪"
+  - 路由链接：投递记录(/)、日程表(/calendar)
+  - 当前路由高亮显示
+  - 蓝色"新增投递"按钮（含 Plus 图标）
+  - 固定顶部 sticky 定位
+
+### Modal (src/components/Modal.tsx)
+
+- **功能**：通用弹窗组件
+- **Props**：
+  - `isOpen: boolean` - 控制显示/隐藏
+  - `onClose: () => void` - 关闭回调
+  - `title: string` - 弹窗标题
+  - `children: ReactNode` - 弹窗内容
+- **特性**：
+  - 使用 React Portal 渲染到 body
+  - 点击遮罩层关闭
+  - ESC 键关闭
+  - 打开时禁止页面滚动
+
+### ConfirmDialog (src/components/ConfirmDialog.tsx)
+
+- **功能**：确认对话框（用于删除操作）
+- **Props**：
+  - `isOpen: boolean`
+  - `onConfirm: () => void` - 确认回调
+  - `onCancel: () => void` - 取消回调
+  - `title: string`
+  - `message: string`
+- **特性**：
+  - 基于 Modal 封装
+  - 红色确认按钮（删除警告样式）
+
+### FilterBar (src/components/FilterBar.tsx)
+
+- **功能**：筛选栏组件
+- **特性**：
+  - 公司级别下拉选择（全部/大厂/中厂/小厂/国企/外企）
+  - "仅显示流程中"复选框
+  - 排序方向切换按钮（升序/降序）
+  - 直接连接 Zustand Store 状态
+
+---
+
 ## 七、状态管理设计
 
 ### applicationStore 状态

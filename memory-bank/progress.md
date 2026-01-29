@@ -6,7 +6,7 @@
 
 ## 当前状态
 
-**当前阶段**：阶段四 - 路由配置（已完成，等待测试）  
+**当前阶段**：阶段五 - 基础 UI 组件开发（已完成，等待测试）  
 **开始时间**：2026 年 1 月 28 日
 
 ---
@@ -26,6 +26,10 @@
 | 三   | 3.2 实现 Store 的数据操作方法             | ✅ 已完成 | 2026-01-28 | fetch, add, update, delete 方法                                    |
 | 三   | 3.3 添加筛选与排序状态                    | ✅ 已完成 | 2026-01-28 | filterByCompanyLevel, filterByInProgress, sortOrder                |
 | 四   | 4.1 配置 React Router                     | ✅ 已完成 | 2026-01-28 | / → ApplicationsPage, /calendar → CalendarPage                     |
+| 五   | 5.1 创建 Navbar 导航栏组件                | ✅ 已完成 | 2026-01-28 | 包含标题、导航链接、新增按钮，当前路由高亮                         |
+| 五   | 5.2 创建 Modal 通用弹窗组件               | ✅ 已完成 | 2026-01-28 | 支持 Portal、遮罩层、ESC 关闭、点击遮罩关闭                        |
+| 五   | 5.3 创建 ConfirmDialog 确认对话框组件     | ✅ 已完成 | 2026-01-28 | 基于 Modal 封装，红色确认按钮用于删除操作                          |
+| 五   | 5.4 创建 FilterBar 筛选栏组件             | ✅ 已完成 | 2026-01-28 | 公司级别下拉框、流程中复选框、排序切换按钮                         |
 
 ---
 
@@ -42,10 +46,10 @@
 - [x] 3.2 实现 Store 的数据操作方法
 - [x] 3.3 添加筛选与排序状态
 - [x] 4.1 配置 React Router
-- [ ] 5.1 创建 Navbar 导航栏组件
-- [ ] 5.2 创建 Modal 通用弹窗组件
-- [ ] 5.3 创建 ConfirmDialog 确认对话框组件
-- [ ] 5.4 创建 FilterBar 筛选栏组件
+- [x] 5.1 创建 Navbar 导航栏组件
+- [x] 5.2 创建 Modal 通用弹窗组件
+- [x] 5.3 创建 ConfirmDialog 确认对话框组件
+- [x] 5.4 创建 FilterBar 筛选栏组件
 - [ ] 6.1 创建 ApplicationForm 表单组件
 - [ ] 6.2 创建 ApplicationCard 投递记录卡片组件
 - [ ] 6.3 实现卡片右键菜单

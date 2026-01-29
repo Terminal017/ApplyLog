@@ -42,3 +42,23 @@ export type ApplicationInput = Omit<
 
 // 更新投递记录时的输入类型
 export type ApplicationUpdate = Partial<Omit<Application, 'id' | 'createdAt'>>
+
+// ==================== 日程类型定义 ====================
+
+// 日程记录
+export interface Schedule {
+  id: string
+  date: string // 格式：YYYY-MM-DD
+  time: string // 格式：HH:mm
+  title: string // 日程标题
+  description: string // 日程描述/备注
+  completed: boolean // 是否完成
+  createdAt: string // 创建时间 ISO Date
+  updatedAt: string // 更新时间 ISO Date
+}
+
+// 新增日程时的输入类型
+export type ScheduleInput = Omit<Schedule, 'id' | 'createdAt' | 'updatedAt'>
+
+// 更新日程时的输入类型
+export type ScheduleUpdate = Partial<Omit<Schedule, 'id' | 'createdAt'>>

@@ -42,10 +42,13 @@
 ┌─────────────────────────────────────────────────────────────┐
 │                    数据持久层 (IndexedDB)                    │
 │  ┌─────────────────────────────────────────────────────────┐│
-│  │  ApplyLogDB                                             ││
-│  │  └── applications (Object Store)                        ││
+│  │  ApplyLogDB (v2)                                        ││
+│  │  ├── applications (Object Store)                        ││
+│  │  │   - keyPath: id                                      ││
+│  │  │   - indexes: applyDate, companyLevel, result         ││
+│  │  └── schedules (Object Store)                           ││
 │  │      - keyPath: id                                      ││
-│  │      - indexes: applyDate, companyLevel, result         ││
+│  │      - indexes: date, completed                         ││
 │  └─────────────────────────────────────────────────────────┘│
 └─────────────────────────────────────────────────────────────┘
 ```

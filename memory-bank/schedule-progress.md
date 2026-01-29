@@ -2,17 +2,17 @@
 
 # 日程表页面开发进度
 
-## 当前状态：规划中
+## 当前状态：阶段一已完成，等待测试
 
 ---
 
 ## 开发任务清单
 
-### 阶段一：数据层
+### 阶段一：数据层 ✅
 
-- [ ] 扩展 IndexedDB，添加 `schedules` 对象仓库
-- [ ] 定义 Schedule 类型（types.ts）
-- [ ] 实现日程 CRUD 操作（db.ts）
+- [x] 扩展 IndexedDB，添加 `schedules` 对象仓库
+- [x] 定义 Schedule 类型（types.ts）
+- [x] 实现日程 CRUD 操作（db.ts）
 
 ### 阶段二：状态管理
 
@@ -48,4 +48,9 @@
 
 ## 完成记录
 
-（开发完成后在此记录）
+### 2024 年 1 月 29 日 - 阶段一完成
+
+- 在 `types.ts` 中定义了 `Schedule`、`ScheduleInput`、`ScheduleUpdate` 类型
+- 扩展 `db.ts`，将数据库版本升级至 v2，添加 `schedules` 对象仓库
+- 实现日程 CRUD 操作：`addSchedule`、`updateSchedule`、`deleteSchedule`、`getSchedule`、`getAllSchedules`
+- 添加索引：`by-date`（按日期）、`by-completed`（按完成状态）

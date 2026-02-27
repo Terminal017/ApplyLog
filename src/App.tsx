@@ -119,7 +119,7 @@ function App(): ReactElement {
   }
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
       <div className="min-h-screen bg-gray-100">
         <Navbar />
 
